@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Intro</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ headerSentence }}</h1>
+    <h2>{{ welcome }}</h2>
+    <p>{{ message }}</p>
+    <p v-if="showExtraInformation">Extra Information</p>
+    <button v-on:click="toggleExtraInfo()">Toggle extra info</button>
+  <button v-on:click="changeMessage()">Click Me</button>
+ <ul>
+   <li v-for="fruit in fruits">{{ fruit }}</li>
+ </ul>
+ <input type="text" v-model="newFruit">
+ <button v-on:click="addFruit">Add fruit</button>
+    <br>
+    <br>
+    <div><input type="text" v-model="headerSentence"></div>
+    <div><input type="text" v-model="welcome"></div>
+
+  </div>
+
+  <script src="index.js"></script>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data: {
+      message: "Hello Vue!",
+      headerSentence: "Welcome to VueJS!",
+      welcome: "hello hello hello!",
+      showExtraInformation: true,
+      fruits: ["apple", "orange", "pear", "avocado"],
+      newFruit: ""
+
+    },
+    methods: {
+    changeMessage: function() {
+      this.message = "Whoa...";
+    },
+    otherMethod: function() {
+      this.changeMessage();
+    },
+    toggleExtraInfo: function() {
+      if(this.showExtraInformation) {
+        this.showExtraInformation = false
+    } else {
+      this.showExtraInformation = true; 
+      }
+    },
+    addFruit: function() {
+      this.fruits.push(this.newFruit);
+    }
+    
+    }
+  });
+
+</script>
+
+</body>
+</html>
