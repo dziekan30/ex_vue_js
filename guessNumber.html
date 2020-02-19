@@ -9,21 +9,43 @@
   <div id="app">
     {{ message }}
     <h1>Guess a number!</h1>
+    <p>The right anserw is: {{ rightAnswer }}</p>
     <div>
-      <input type="text">
-      <button v-on:click="numberAnswer">Submit</button>
-      <button>Play again</button>
+      <input type="text" v-model="userGuess">
+      <button v-on:click="submitGuess()">Submit</button>
+      <button v-on:click="resetGame()">Play again</button>
     </div>
     <div>
+      <img v-if="showWin" src="https://image.shutterstock.com/image-vector/you-win-poster-colorful-watercolor-260nw-1075991621.jpg">
     </div>
   </div>
   <script>
     var app = new Vue({
       el: "#app",
       data: {
-        message: "Hello Vue!"
+        message: "And ...",
+        rightAnswer: Math.floor(Math.random() * 100) + 1,
+        userGuess: null,
+        showWin: false
+
       },
       methods: {
+        submitGuess: function() {
+          if(this.userGuess < this.rightAnswer) {
+            this.message = "Too low!";
+          } else if(this.userGuess > this.rightAnswer) {
+            this.message = "To high!";
+          } else {
+            this.message = "Just right!";
+            this.showWin = true;
+          }
+        },
+        resetGame: function () {
+          this.rightAnswer = Math.floor(Math.random() * 100) + 1;
+          this.userGuess = null;
+          this.showWin = false;
+
+        }
       
       }
     });
